@@ -1,5 +1,6 @@
  import 'package:event_app/UI/home/home_screen.dart';
 import 'package:event_app/provider/languge_provider.dart';
+import 'package:event_app/utels/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,8 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       locale: Locale(langugeProvider.currentLocal),
-      
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
     );
   }
 }

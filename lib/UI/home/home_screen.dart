@@ -1,3 +1,4 @@
+import 'package:event_app/UI/home/tabs/profile/profile_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -9,12 +10,10 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.language),
-        leading: Icon(Icons.arrow_back)
+       
+       
       ),
-      body: Center(
-        child: Text('Home'),
-      ),
+      body: ProfileTap(),
     );
   }
 }
