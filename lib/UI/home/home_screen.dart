@@ -1,89 +1,76 @@
+import 'package:event_app/UI/home/tabs/app_event/events_tap.dart';
+import 'package:event_app/UI/home/tabs/floting_button/creat_new_event.dart';
+import 'package:event_app/UI/home/tabs/location/location_tap.dart';
+import 'package:event_app/UI/home/tabs/love/love_tap.dart';
 import 'package:event_app/UI/home/tabs/profile/profile_tap.dart';
 import 'package:event_app/utels/app_colors.dart';
+import 'package:event_app/utels/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
 
-  const HomeScreen({super.key});
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+
+  List<Widget> tabsList = [
+    EventsTap(),
+    LocationTap(),
+    CreatNewEvent(), // زرار +
+    LoveTap(),
+    ProfileTap(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // الهيدر
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
-            decoration: BoxDecoration(
-              color: AppColors.primaryLight,
-              borderRadius: const BorderRadius.only(
-                bottomLeft: Radius.circular(60),
-              ),
-            ),
-            child: Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/route_logo.png',
-                    width: 70,
-                    height: 70,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'John Safwat',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: 5),
-                    Text(
-                      'johnsafwat.route@gmail.com',
-                      style: TextStyle(fontSize: 14, color: Colors.white70),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-
-          // محتوى ProfileTap
-          Expanded(child: ProfileTap()),
-
-          // زرار Log out
-          Padding(
-            padding: const EdgeInsets.only(bottom: 24.0),
-            child: ElevatedButton(
-              onPressed: () {
-                print('Logging out...');
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 16,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Log Out',
-                style: TextStyle(fontSize: 16, color: Colors.white),
-              ),
-            ),
-          ),
-        ],
+      // ✅ بدون FloatingActionButton
+      bottomNavigationBar: Theme(
+        data: Theme.of(context).copyWith(canvasColor: AppColors.primaryLight),
+        child: BottomNavigationBar(
+          selectedItemColor: AppColors.whiteBgColor,
+          unselectedItemColor: AppColors.whiteBgColor,
+          currentIndex: selectedIndex,
+          onTap: (index) {
+            setState(() {
+              selectedIndex = index;
+            });
+          },
+          type: BottomNavigationBarType.fixed,
+          items: [
+            _buildBottomNavItem("assets/images/home_icon.png", "Home", 0),
+            _buildBottomNavItem("assets/images/location_icon.png", "Map", 1),
+            _buildBottomNavItem(
+              "assets/images/add_icon.png",
+              "",
+              2,
+            ), // زرار + في النص
+            _buildBottomNavItem("assets/images/heart_icon.png", "Love", 3),
+            _buildBottomNavItem("assets/images/user_icon.png", "Profile", 4),
+          ],
+        ),
       ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [Expanded(child: tabsList[selectedIndex])],
+      ),
+    );
+  }
+
+  BottomNavigationBarItem _buildBottomNavItem(
+    String imagePath,
+    String label,
+    int index,
+  ) {
+    return BottomNavigationBarItem(
+      icon: ImageIcon(AssetImage(imagePath)),
+      activeIcon: ImageIcon(AssetImage(imagePath), color: Colors.white),
+      label: label,
     );
   }
 }
