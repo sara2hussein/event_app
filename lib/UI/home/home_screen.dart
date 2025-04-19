@@ -19,12 +19,12 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> tabsList = [EventsTap(), LocationTap(), LoveTap(), ProfileTap()];
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: AppColors.primaryLight),
       bottomNavigationBar: Theme(
         data: Theme.of(
           context,
         ).copyWith(canvasColor: AppColors.transparentColor),
         child: BottomAppBar(
+          padding: EdgeInsets.zero,
           color: Theme.of(context).primaryColor,
           shape: CircularNotchedRectangle(),
           notchMargin: 4,
@@ -88,6 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
         AssetImage(
           selectedIndex == index ? SelectedIconName : UnselectedIconName,
         ),
+        size: 22,
       ),
       label: lable,
     );

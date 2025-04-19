@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
+  
   Widget build(BuildContext context) {
     var langugeProvider = Provider.of<LangugeProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);

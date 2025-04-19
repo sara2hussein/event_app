@@ -13,4 +13,6 @@ class AssetsManager {
   static const String user_select = "assets/images/icons/user_select.png";
   static const String love_select = "assets/images/icons/love_select.png";
   static const String loc_select = "assets/images/icons/map_select.png";
+
+  static const String sun_icon = "assets/images/icons/sun.png";
 }
