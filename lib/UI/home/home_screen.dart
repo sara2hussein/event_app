@@ -1,5 +1,4 @@
 import 'package:event_app/UI/home/tabs/app_event/events_tap.dart';
-import 'package:event_app/UI/home/tabs/floting_button/creat_new_event.dart';
 import 'package:event_app/UI/home/tabs/location/location_tap.dart';
 import 'package:event_app/UI/home/tabs/love/love_tap.dart';
 import 'package:event_app/UI/home/tabs/profile/profile_tap.dart';
@@ -10,7 +9,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home-screen';
-
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -18,43 +16,59 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 0;
 
-  List<Widget> tabsList = [
-    EventsTap(),
-    LocationTap(),
-    CreatNewEvent(), // زرار +
-    LoveTap(),
-    ProfileTap(),
-  ];
-
-  @override
+  List<Widget> tabsList = [EventsTap(), LocationTap(), LoveTap(), ProfileTap()];
   Widget build(BuildContext context) {
     return Scaffold(
-      // ✅ بدون FloatingActionButton
+      appBar: AppBar(backgroundColor: AppColors.primaryLight),
       bottomNavigationBar: Theme(
-        data: Theme.of(context).copyWith(canvasColor: AppColors.primaryLight),
-        child: BottomNavigationBar(
-          selectedItemColor: AppColors.whiteBgColor,
-          unselectedItemColor: AppColors.whiteBgColor,
-          currentIndex: selectedIndex,
-          onTap: (index) {
-            setState(() {
+        data: Theme.of(
+          context,
+        ).copyWith(canvasColor: AppColors.transparentColor),
+        child: BottomAppBar(
+          color: Theme.of(context).primaryColor,
+          shape: CircularNotchedRectangle(),
+          notchMargin: 4,
+          child: BottomNavigationBar(
+            currentIndex: selectedIndex,
+            onTap: (index) {
               selectedIndex = index;
-            });
-          },
-          type: BottomNavigationBarType.fixed,
-          items: [
-            _buildBottomNavItem("assets/images/home_icon.png", "Home", 0),
-            _buildBottomNavItem("assets/images/location_icon.png", "Map", 1),
-            _buildBottomNavItem(
-              "assets/images/add_icon.png",
-              "",
-              2,
-            ), // زرار + في النص
-            _buildBottomNavItem("assets/images/heart_icon.png", "Love", 3),
-            _buildBottomNavItem("assets/images/user_icon.png", "Profile", 4),
-          ],
+              setState(() {});
+            },
+            items: [
+              builtBottomNavBarItems(
+                index: 0,
+                UnselectedIconName: AssetsManager.home_unselect,
+
+                SelectedIconName: AssetsManager.home_icon,
+                lable: AppLocalizations.of(context)!.home,
+              ),
+              builtBottomNavBarItems(
+                UnselectedIconName: AssetsManager.loc_icon,
+                index: 1,
+                SelectedIconName: AssetsManager.loc_select,
+                lable: AppLocalizations.of(context)!.map,
+              ),
+              builtBottomNavBarItems(
+                UnselectedIconName: AssetsManager.love_icon,
+                index: 2,
+                SelectedIconName: AssetsManager.love_select,
+                lable: AppLocalizations.of(context)!.love,
+              ),
+              builtBottomNavBarItems(
+                UnselectedIconName: AssetsManager.user_icon,
+                index: 3,
+                SelectedIconName: AssetsManager.user_select,
+                lable: AppLocalizations.of(context)!.profile,
+              ),
+            ],
+          ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: Icon(Icons.add, color: AppColors.whiteColor, size: 30),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [Expanded(child: tabsList[selectedIndex])],
@@ -62,15 +76,20 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  BottomNavigationBarItem _buildBottomNavItem(
-    String imagePath,
-    String label,
-    int index,
-  ) {
+  BottomNavigationBarItem builtBottomNavBarItems({
+    required String UnselectedIconName,
+
+    required int index,
+    required String SelectedIconName,
+    required String lable,
+  }) {
     return BottomNavigationBarItem(
-      icon: ImageIcon(AssetImage(imagePath)),
-      activeIcon: ImageIcon(AssetImage(imagePath), color: Colors.white),
-      label: label,
+      icon: ImageIcon(
+        AssetImage(
+          selectedIndex == index ? SelectedIconName : UnselectedIconName,
+        ),
+      ),
+      label: lable,
     );
   }
 }
