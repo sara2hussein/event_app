@@ -21,11 +21,14 @@ class _ProfileTapState extends State<ProfileTap> {
     var languageProvider = Provider.of<LangugeProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
+      appBar: AppBar(backgroundColor: Theme.of(context).primaryColor),
+
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: height * 0.02),
             Text(
               AppLocalizations.of(context)!.language,
               style: Theme.of(context).textTheme.headlineLarge,

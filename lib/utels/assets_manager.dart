@@ -15,4 +15,7 @@ class AssetsManager {
   static const String loc_select = "assets/images/icons/map_select.png";
 
   static const String sun_icon = "assets/images/icons/sun.png";
+  static const String post_select = "assets/images/icons/postSelect.png";
+
+  static const String post_Unselect = "assets/images/icons/postUnSelect.png";
 }

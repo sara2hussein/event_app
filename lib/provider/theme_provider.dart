@@ -11,4 +11,9 @@ class ThemeProvider extends ChangeNotifier {
     currentTheme = newTheme;
     notifyListeners();
   }
+
+  bool isDarkMode() {
+    return currentTheme == ThemeMode.dark;
+
+  }
 }
