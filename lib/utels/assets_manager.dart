@@ -18,4 +18,7 @@ class AssetsManager {
   static const String post_select = "assets/images/icons/postSelect.png";
 
   static const String post_Unselect = "assets/images/icons/postUnSelect.png";
+  static const String search_event = "assets/images/icons/search_event.png";
+  static const String routeImage = "assets/images/routeImage.png";
+  static const String exitIcon = "assets/images/icons/exit.png";
 }

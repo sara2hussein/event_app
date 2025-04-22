@@ -28,6 +28,11 @@ class AppStyles {
     fontWeight: FontWeight.bold,
     color: AppColors.whiteColor,
   );
+  static TextStyle bold14gray = GoogleFonts.inter(
+    fontSize: 14,
+    fontWeight: FontWeight.bold,
+    color: AppColors.greyColor,
+  );
   static TextStyle bold14Primary = GoogleFonts.inter(
     fontSize: 14,
     fontWeight: FontWeight.bold,

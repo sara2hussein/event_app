@@ -3,6 +3,7 @@ import 'package:event_app/UI/home/tabs/profile/theme_bottom_sheet.dart';
 import 'package:event_app/provider/languge_provider.dart';
 import 'package:event_app/provider/theme_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
+import 'package:event_app/utels/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:event_app/utels/app_styles.dart';
@@ -21,7 +22,34 @@ class _ProfileTapState extends State<ProfileTap> {
     var languageProvider = Provider.of<LangugeProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
-      appBar: AppBar(backgroundColor: Theme.of(context).primaryColor),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
+        toolbarHeight: height * 0.18,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(bottomLeft: Radius.circular(46)),
+        ),
+        title: Row(
+          children: [
+            Image.asset(
+              AssetsManager.routeImage,
+              width: 120,
+              height: 120,
+              fit: BoxFit.cover,
+            ),
+            SizedBox(width: width * 0.04),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('John Safwat', style: AppStyles.bold24White),
+                Text(
+                  'johnsafwat.route@gmail.com',
+                  style: AppStyles.medium16White,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
 
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -70,8 +98,8 @@ class _ProfileTapState extends State<ProfileTap> {
               AppLocalizations.of(context)!.theme,
               style: Theme.of(context).textTheme.headlineLarge,
             ),
-            SizedBox(height: height * 0.02),
 
+            // SizedBox(height: height * 0.02),
             InkWell(
               onTap: () {
                 showThemeBottomSheet();
@@ -104,6 +132,30 @@ class _ProfileTapState extends State<ProfileTap> {
                 ),
               ),
             ),
+            Spacer(),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.redColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.06,
+                  vertical: height * 0.02,
+                ),
+              ),
+              onPressed: () {},
+              child: Row(
+                children: [
+                  Icon(Icons.logout, color: AppColors.whiteColor),
+                  Text(
+                    AppLocalizations.of(context)!.logout,
+                    style: AppStyles.regular20White,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: height * 0.03),
           ],
         ),
       ),

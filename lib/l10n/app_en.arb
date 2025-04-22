@@ -30,6 +30,8 @@
   "book":"Book Club",
   "exhibition":"Exhibition",
   "holiday":"Holiday",
-  "eating":"Eating"
+  "eating":"Eating",
+  "search":"Search for Event",
+  "logout":"Log Out"
   
 }

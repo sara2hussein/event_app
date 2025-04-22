@@ -1,4 +1,5 @@
 import 'package:event_app/UI/home/home_screen.dart';
+import 'package:event_app/UI/home/tabs/floting_button/add_event.dart';
 import 'package:event_app/UI/intro/intro_screen.dart';
 import 'package:event_app/UI/intro/onboarding_screen.dart';
 import 'package:event_app/provider/languge_provider.dart';
@@ -7,7 +8,6 @@ import 'package:event_app/utels/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
-
 
 void main() {
   runApp(
@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  
   Widget build(BuildContext context) {
     var langugeProvider = Provider.of<LangugeProvider>(context);
     var themeProvider = Provider.of<ThemeProvider>(context);
@@ -37,6 +36,7 @@ class MyApp extends StatelessWidget {
       routes: {
         IntroScreen.routeName: (context) => IntroScreen(),
         OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
+        AddEventScreen.routeName: (context) => AddEventScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,

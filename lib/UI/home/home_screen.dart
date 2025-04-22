@@ -1,4 +1,5 @@
 import 'package:event_app/UI/home/tabs/app_event/events_tap.dart';
+import 'package:event_app/UI/home/tabs/floting_button/add_event.dart';
 import 'package:event_app/UI/home/tabs/location/location_tap.dart';
 import 'package:event_app/UI/home/tabs/love/love_tap.dart';
 import 'package:event_app/UI/home/tabs/profile/profile_tap.dart';
@@ -65,7 +66,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, AddEventScreen.routeName);
+        },
         child: Icon(Icons.add, color: AppColors.whiteColor, size: 30),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
