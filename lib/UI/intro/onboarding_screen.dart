@@ -1,11 +1,9 @@
-import 'package:event_app/provider/languge_provider.dart';
-import 'package:event_app/provider/theme_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:provider/provider.dart';
+
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class OnBoardingScreen extends StatelessWidget {

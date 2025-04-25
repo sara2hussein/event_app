@@ -31,6 +31,7 @@ class _EventsTapState extends State<EventsTap> {
       AppLocalizations.of(context)!.holiday,
       AppLocalizations.of(context)!.eating,
     ];
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -103,6 +104,11 @@ class _EventsTapState extends State<EventsTap> {
                     tabs:
                         eventsNameList.map((eventName) {
                           return EventTapIcon(
+                            selectedBackgroundColor:
+                                Theme.of(context).focusColor,
+                            selectedTextStyle:
+                                Theme.of(context).textTheme.headlineSmall,
+                            unSelectedTextStyle: AppStyles.medium16White,
                             eventName: eventName,
                             isSelected:
                                 selectIndex ==

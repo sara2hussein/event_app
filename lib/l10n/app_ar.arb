@@ -32,7 +32,27 @@
   "holiday":"عطلة",
   "eating":"تناول الطعام",
   "search":"البحث عن الحدث",
-  "logout":"تسجيل الخروج"
+  "logout":"تسجيل الخروج",
+  "create_event":"إنشاء حدث",
+  "title":"العنوان",
+  "event_title":"عنوان الحدث",
+  "describtion":"الوصف",
+  "event_describtion":"وصف الحدث",
+  "event_date":"تاريخ الحدث",
+  "choose_date":"اختر التاريخ",
+  "event_time":"وقت الحدث",
+  "choose_time":"اختر الوقت",
+  "location":"الموقع",
+  "choose_event_location":"اختر موقع الحدث",
+  "add_event":"إضافة حدث",
+  "enter_event_title":"من فضلك ادخل عنوان الحدث",
+  "enter_event_description":"من فضلك ادخل وصف الحدث",
+  "please_choose_time":"من فضلك اختار الوقت",
+  "please_choose_date":"من فضلك اختار التاريخ"
+
+  
+
+
   
 
 

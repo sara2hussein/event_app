@@ -21,4 +21,21 @@ class AssetsManager {
   static const String search_event = "assets/images/icons/search_event.png";
   static const String routeImage = "assets/images/routeImage.png";
   static const String exitIcon = "assets/images/icons/exit.png";
+  static const String bookEvent = "assets/images/BP.png";
+
+  static const String sportEvent = "assets/images/SP.png";
+
+  static const String meetEvent = "assets/images/MP.png";
+
+  static const String birthdayEvent = "assets/images/BR.png";
+  static const String ettingEvent = "assets/images/ET.png";
+  static const String exEvent = "assets/images/EX.png";
+  static const String gamingEvent = "assets/images/GM.png";
+  static const String holidayEvent = "assets/images/HD.png";
+  static const String workEvent = "assets/images/WS.png";
+  static const String Note_Edit = "assets/images/icons/Note_Edit.png";
+  static const String locationIcon = "assets/images/icons/locationIcon.png";
+  static const String Calendar_Days = "assets/images/icons/Calendar_Days.png";
+  static const String Clock = "assets/images/icons/Clock.png";
+  static const String Iconlocation = "assets/images/icons/locationIcon.png";
 }

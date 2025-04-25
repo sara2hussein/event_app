@@ -7,6 +7,11 @@ class AppTheme {
     focusColor: AppColors.whiteColor,
     primaryColor: AppColors.primaryLight,
     scaffoldBackgroundColor: AppColors.whiteBgColor,
+    appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(
+        color: AppColors.primaryLight,
+      )
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
       showUnselectedLabels: true,
@@ -35,6 +40,11 @@ class AppTheme {
 
     primaryColor: AppColors.primaryDark,
     scaffoldBackgroundColor: AppColors.primaryDark,
+     appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(
+        color: AppColors.primaryLight,
+      )
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       elevation: 0,
 

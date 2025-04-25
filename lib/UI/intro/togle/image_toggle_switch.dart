@@ -1,9 +1,10 @@
+import 'package:event_app/utels/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class ImageToggleSwitch extends StatefulWidget {
   final String firstImagePath;
   final String secondImagePath;
-  final Function(int index)? onToggle; 
+  final Function(int index)? onToggle;
 
   const ImageToggleSwitch({
     Key? key,
@@ -37,7 +38,7 @@ class _ImageToggleSwitchState extends State<ImageToggleSwitch> {
           onTap: () => _handleToggle(true),
           child: Container(
             decoration: BoxDecoration(
-              color: isFirstSelected ? Colors.grey : Colors.white,
+              color: isFirstSelected ? AppColors.primaryLight : Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             padding: EdgeInsets.all(8),
@@ -49,7 +50,7 @@ class _ImageToggleSwitchState extends State<ImageToggleSwitch> {
           onTap: () => _handleToggle(false),
           child: Container(
             decoration: BoxDecoration(
-              color: !isFirstSelected ? Colors.grey : Colors.white,
+              color: !isFirstSelected ? AppColors.primaryLight : Colors.white,
               borderRadius: BorderRadius.circular(12),
             ),
             padding: EdgeInsets.all(8),

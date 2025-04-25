@@ -32,6 +32,23 @@
   "holiday":"Holiday",
   "eating":"Eating",
   "search":"Search for Event",
-  "logout":"Log Out"
+  "logout":"Log Out",
+  "create_event":"Create Event",
+  "title":"Title",
+  "event_title":"Event Title",
+  "describtion":"Description",
+  "event_describtion":"Event Description",
+  "event_date":"Event Date",
+  "choose_date":"Choose Date",
+  "event_time":"Event Time",
+  "choose_time":"Choose Time",
+  "location":"Location",
+  "choose_event_location":"Choose Event Location",
+  "add_event":"Add Event",
+  "enter_event_title":"Please enter event title",
+  "enter_event_description":"Please enter event description",
+  "please_choose_time":"please choose time",
+  "please_choose_date":"please choose date"
+
   
 }
