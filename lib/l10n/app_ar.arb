@@ -48,7 +48,25 @@
   "enter_event_title":"من فضلك ادخل عنوان الحدث",
   "enter_event_description":"من فضلك ادخل وصف الحدث",
   "please_choose_time":"من فضلك اختار الوقت",
-  "please_choose_date":"من فضلك اختار التاريخ"
+  "please_choose_date":"من فضلك اختار التاريخ",
+  "re_password":"إعادة كلمة المرور",
+  "name":"الاسم",
+  "password":"كلمة المرور",
+  "email":"البريد الإلكتروني",
+  "login":"تسجيل الدخول",
+  "login_with_google":"تسجيل الدخول باستخدام جوجل",
+  "dont_have_acc":"ليس لديك حساب ؟ ",
+  "create_account":"إنشاء حساب",
+  "or":"أو",
+  "already_have_acc":"هل لديك حساب بالفعل ؟",
+  "register":"تسجيل",
+  "forget_pass":"نسيت كلمة المرور",
+  "reset_pass":"إعادة تعيين كلمة المرور",
+  "success": "نجاح",
+"event_added_successfully": "تمت إضافة الحدث بنجاح",
+"ok": "حسنًا"
+
+
 
   
 

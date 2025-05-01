@@ -48,7 +48,25 @@
   "enter_event_title":"Please enter event title",
   "enter_event_description":"Please enter event description",
   "please_choose_time":"please choose time",
-  "please_choose_date":"please choose date"
+  "please_choose_date":"please choose date",
+  "re_password":"Re Password",
+  "name":"Name",
+  "password":"Password",
+  "email":"Email",
+  "login":"Login",
+  "login_with_google":"Login With Google",
+  "dont_have_acc":"Don't Have Account ? ",
+  "create_account":"Create Account",
+  "or":"Or",
+  "already_have_acc":"Already Have Account ? ",
+  "register":"Register",
+  "forget_pass":"Forget Password",
+  "reset_pass":"Reset Password",
+  "success": "success",
+"event_added_successfully": "event added successfully",
+"ok": "ok"
+
+
 
   
 }

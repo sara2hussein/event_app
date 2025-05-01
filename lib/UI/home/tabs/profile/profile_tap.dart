@@ -28,6 +28,7 @@ class _ProfileTapState extends State<ProfileTap> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(bottomLeft: Radius.circular(46)),
         ),
+        titleSpacing: -30,
         title: Row(
           children: [
             Image.asset(
@@ -36,16 +37,24 @@ class _ProfileTapState extends State<ProfileTap> {
               height: 120,
               fit: BoxFit.cover,
             ),
-            SizedBox(width: width * 0.04),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('John Safwat', style: AppStyles.bold24White),
-                Text(
-                  'johnsafwat.route@gmail.com',
-                  style: AppStyles.medium16White,
-                ),
-              ],
+            SizedBox(width: width * 0.02),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'John Safwat',
+                    style: AppStyles.bold24White,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    'johnsafwat.route@gmail.com',
+                    style: AppStyles.medium16White,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
             ),
           ],
         ),

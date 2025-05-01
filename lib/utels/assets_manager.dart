@@ -38,4 +38,14 @@ class AssetsManager {
   static const String Calendar_Days = "assets/images/icons/Calendar_Days.png";
   static const String Clock = "assets/images/icons/Clock.png";
   static const String Iconlocation = "assets/images/icons/locationIcon.png";
+
+  static const String reseat_pass = "assets/images/reseat_pass.png";
+
+  static const String IconEmail = "assets/images/icons/IconEmail.png";
+  static const String IconPass = "assets/images/icons/IconPass.png";
+  static const String IconUser = "assets/images/icons/IconUser.png";
+
+  static const String eye_slash = "assets/images/icons/eye_slash.png";
+
+  static const String googlicon = "assets/images/icons/googlicon.png";
 }

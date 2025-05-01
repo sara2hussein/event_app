@@ -2,9 +2,12 @@ import 'package:event_app/UI/home/tabs/app_event/event_tap_icon.dart';
 import 'package:event_app/UI/home/tabs/floting_button/custom_elevated_button.dart';
 import 'package:event_app/UI/home/tabs/floting_button/event_date_or_time.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
+import 'package:event_app/model/event.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:event_app/utels/app_styles.dart';
+import 'package:event_app/utels/firebase_utels.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -22,6 +25,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
   String formatedDate = '';
   String? formatedTime;
   TimeOfDay? selectedTime;
+  String selectedImage = '';
+  String selectedEventName = '';
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -52,8 +57,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
       AssetsManager.holidayEvent,
       AssetsManager.ettingEvent,
     ];
-    String selectedImage = imageSelectedEvent[selectedIndex];
-    String selectedEventName = eventsNameList[selectedIndex];
+    selectedImage = imageSelectedEvent[selectedIndex];
+    selectedEventName = eventsNameList[selectedIndex];
 
     return Scaffold(
       appBar: AppBar(
@@ -252,28 +257,60 @@ class _AddEventScreenState extends State<AddEventScreen> {
   }
 
   void addEvent() {
-  if (formKey.currentState?.validate() == true) {
-    if (selectedDate == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.please_choose_date),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
+    if (formKey.currentState?.validate() == true) {
+      if (selectedDate == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.please_choose_date),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
 
-    if (selectedTime == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(AppLocalizations.of(context)!.please_choose_time),
-          backgroundColor: Colors.red,
-        ),
+      if (selectedTime == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AppLocalizations.of(context)!.please_choose_time),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+      Event event = Event(
+        image: selectedImage,
+        title: titleController.text,
+        time: formatedTime!,
+        dateTime: selectedDate!,
+        description: descriptionController.text,
+        eventName: selectedEventName,
       );
-      return;
+      FirebaseUtels.addEventToFireStore(event).timeout(
+        Duration(milliseconds: 500),
+        onTimeout: () {
+          showDialog(
+            context: context,
+            builder:
+                (context) => AlertDialog(
+                  title: Text(AppLocalizations.of(context)!.success),
+                  content: Text(
+                    AppLocalizations.of(context)!.event_added_successfully,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(); // لإغلاق الـ dialog
+                        Navigator.of(
+                          context,
+                        ).pop(); // للرجوع للشاشة السابقة مثلاً
+                      },
+                      child: Text(AppLocalizations.of(context)!.ok),
+                    ),
+                  ],
+                ),
+          );
+        },
+      );
     }
-
   }
-}
-
 }

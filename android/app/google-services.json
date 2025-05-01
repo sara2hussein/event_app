@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "935602342556",
+    "project_id": "event-app-97784",
+    "storage_bucket": "event-app-97784.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935602342556:android:996da39275aab9597e7b59",
+        "android_client_info": {
+          "package_name": "com.example.event_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwX_3-ovs-TDGymk2qL6b-9TowUjJ4a-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
