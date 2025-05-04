@@ -3,6 +3,7 @@ import 'package:event_app/UI/home/tabs/floting_button/custom_elevated_button.dar
 import 'package:event_app/UI/home/tabs/floting_button/event_date_or_time.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
 import 'package:event_app/model/event.dart';
+import 'package:event_app/provider/event_list_provide.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:event_app/utels/app_styles.dart';
@@ -11,6 +12,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class AddEventScreen extends StatefulWidget {
   static const String routeName = '/add-event';
@@ -30,11 +32,17 @@ class _AddEventScreenState extends State<AddEventScreen> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var formKey = GlobalKey<FormState>();
+  late EventListProvide eventListprovider;
+  void initState() {
+    super.initState();
+    eventListprovider = Provider.of<EventListProvide>(context, listen: false);
+  }
 
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+
     List<String> eventsNameList = [
       AppLocalizations.of(context)!.sport,
       AppLocalizations.of(context)!.birthday,
@@ -299,10 +307,9 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop(); // لإغلاق الـ dialog
-                        Navigator.of(
-                          context,
-                        ).pop(); // للرجوع للشاشة السابقة مثلاً
+                        eventListprovider.getAllEvent();
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
                       },
                       child: Text(AppLocalizations.of(context)!.ok),
                     ),

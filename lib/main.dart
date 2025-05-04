@@ -6,6 +6,7 @@ import 'package:event_app/UI/intro/onboarding_screen.dart';
 import 'package:event_app/UI/register/create_acc.dart';
 import 'package:event_app/UI/register/forget_pass.dart';
 import 'package:event_app/UI/register/lodin_screen.dart';
+import 'package:event_app/provider/event_list_provide.dart';
 import 'package:event_app/provider/languge_provider.dart';
 import 'package:event_app/provider/theme_provider.dart';
 import 'package:event_app/utels/app_theme.dart';
@@ -24,6 +25,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (context) => LangugeProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => EventListProvide()),
       ],
       child: const MyApp(),
     ),

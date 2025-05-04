@@ -1,13 +1,20 @@
+import 'package:event_app/model/event.dart';
+import 'package:event_app/provider/event_list_provide.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EventItem extends StatelessWidget {
+  Event event;
+  EventItem({super.key, required this.event});
   @override
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
+    var eventListProvider = Provider.of<EventListProvide>(context);
     return Container(
       height: height * 0.31,
 
@@ -16,7 +23,7 @@ class EventItem extends StatelessWidget {
         border: Border.all(color: AppColors.primaryLight, width: 1),
         image: DecorationImage(
           fit: BoxFit.fill,
-          image: AssetImage('assets/images/BR.png'),
+          image: AssetImage(event.image),
         ),
       ),
       child: Column(
@@ -39,8 +46,14 @@ class EventItem extends StatelessWidget {
             ),
             child: Column(
               children: [
-                Text('22', style: AppStyles.bold20Primary),
-                Text('Nov', style: AppStyles.bold20Primary),
+                Text(
+                  event.dateTime.day.toString(),
+                  style: AppStyles.bold20Primary,
+                ),
+                Text(
+                  DateFormat('MMM').format(event.dateTime),
+                  style: AppStyles.bold20Primary,
+                ),
               ],
             ),
           ),
@@ -62,13 +75,17 @@ class EventItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'This is a Birthday party',
+                  event.title.toString(),
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    eventListProvider.updateIsFavoriteEvents(event);
+                  },
                   icon: Image.asset(
-                    AssetsManager.post_Unselect,
+                    event.isFavoret == true
+                        ? AssetsManager.post_select
+                        : AssetsManager.post_Unselect,
                     color: AppColors.primaryLight,
                   ),
                 ),

@@ -64,7 +64,9 @@
   "reset_pass":"Reset Password",
   "success": "success",
 "event_added_successfully": "event added successfully",
-"ok": "ok"
+"ok": "ok",
+"no_items_found":"No Items Found",
+"no_items_fav_found":"No Favorite Event Found"
 
 
 

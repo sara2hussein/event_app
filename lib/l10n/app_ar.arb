@@ -64,7 +64,10 @@
   "reset_pass":"إعادة تعيين كلمة المرور",
   "success": "نجاح",
 "event_added_successfully": "تمت إضافة الحدث بنجاح",
-"ok": "حسنًا"
+"ok": "حسنًا",
+"no_items_found":" لا يوجد عناصر",
+"no_items_fav_found": "لا توجد عناصر مفضله"
+
 
 
 
