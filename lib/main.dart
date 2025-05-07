@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
-      initialRoute: LoginScreen.routeName,
+      initialRoute: IntroScreen.routeName,
       routes: {
         IntroScreen.routeName: (context) => IntroScreen(),
         OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),

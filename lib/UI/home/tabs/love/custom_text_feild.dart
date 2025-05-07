@@ -15,6 +15,8 @@ class CustomTextFeild extends StatelessWidget {
   int? maxLines;
   Myvalidator validator;
   TextEditingController? controller;
+  TextInputType keyboardInputType;
+  bool? obscureText;
   CustomTextFeild({
     this.borderColor,
     this.controller,
@@ -26,12 +28,17 @@ class CustomTextFeild extends StatelessWidget {
     this.lableStyle,
     this.suffixIcon,
     this.maxLines,
+    this.keyboardInputType = TextInputType.text,
+    this.obscureText,
   });
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: AppColors.primaryLight,
       maxLines: maxLines ?? 1,
+      keyboardType: keyboardInputType ,
+      obscureText: obscureText?? false,
+      obscuringCharacter: '*',
       controller: controller,
       validator: validator,
       decoration: InputDecoration(

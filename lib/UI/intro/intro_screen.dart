@@ -26,9 +26,9 @@ class IntroScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(child: Image.asset(AssetsManager.logo_top, height: 60)),
+            Center(child: Image.asset(AssetsManager.logo_top, height: 50)),
 
-            SizedBox(height: height * 0.03),
+            SizedBox(height: height * 0.02),
 
             Image.asset(AssetsManager.introHeader, height: height * 0.4),
 

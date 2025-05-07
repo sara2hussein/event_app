@@ -54,10 +54,10 @@ class OnBoardingScreen extends StatelessWidget {
         style: AppStyles.bold14Primary,
       ),
       onDone: () {
-        Navigator.pushReplacementNamed(context, '/home-screen');
+        Navigator.pushReplacementNamed(context, '/login_screen');
       },
       onSkip: () {
-        Navigator.pushReplacementNamed(context, '/home-screen');
+        Navigator.pushReplacementNamed(context, '/login_screen');
       },
       dotsDecorator: DotsDecorator(
         size: const Size.square(10.0),
