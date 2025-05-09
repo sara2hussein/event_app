@@ -1,14 +1,19 @@
+import 'package:event_app/UI/home/home_screen.dart';
 import 'package:event_app/UI/home/tabs/floting_button/custom_elevated_button.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
 import 'package:event_app/UI/intro/intro_screen.dart';
 import 'package:event_app/UI/intro/togle/image_toggle_switch.dart';
 import 'package:event_app/UI/register/create_acc.dart';
 import 'package:event_app/UI/register/forget_pass.dart';
+import 'package:event_app/model/my_user.dart';
+import 'package:event_app/provider/event_list_provide.dart';
 import 'package:event_app/provider/languge_provider.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:event_app/utels/dialog_utels.dart';
+import 'package:event_app/utels/firebase_utels.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -219,6 +224,19 @@ class _LoginScreenState extends State<LoginScreen> {
               email: emailController.text,
               password: passwordController.text,
             );
+        MyUser? user = await FirebaseUtels.readUserFromFireStore(
+          credential.user?.uid ?? '',
+        );
+        if (user == null) {
+          return;
+        }
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.updateUser(user);
+        var eventListProvider = Provider.of<EventListProvide>(
+          context,
+          listen: false,
+        );
+        eventListProvider.changeSelectedIndex(0, userProvider.currentUser!.id);
         DialogUtels.hideLoading(context);
         DialogUtels.showMessage(
           context: context,
@@ -226,7 +244,7 @@ class _LoginScreenState extends State<LoginScreen> {
           title: 'Success',
           posActionName: 'OK',
           posAction: () {
-            Navigator.of(context).pushNamed(IntroScreen.routeName);
+            Navigator.of(context).pushReplacementNamed(HomeScreen.routeName);
           },
         );
         print('login successsfuly');

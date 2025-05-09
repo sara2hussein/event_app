@@ -9,6 +9,7 @@ import 'package:event_app/UI/register/lodin_screen.dart';
 import 'package:event_app/provider/event_list_provide.dart';
 import 'package:event_app/provider/languge_provider.dart';
 import 'package:event_app/provider/theme_provider.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -19,13 +20,14 @@ import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseFirestore.instance.disableNetwork();
+  // await FirebaseFirestore.instance.disableNetwork();
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => LangugeProvider()),
         ChangeNotifierProvider(create: (context) => ThemeProvider()),
         ChangeNotifierProvider(create: (context) => EventListProvide()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
       ],
       child: const MyApp(),
     ),

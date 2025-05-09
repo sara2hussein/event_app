@@ -1,6 +1,7 @@
 import 'package:event_app/UI/home/tabs/app_event/event_item.dart';
 import 'package:event_app/UI/home/tabs/app_event/event_tap_icon.dart';
 import 'package:event_app/provider/event_list_provide.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
@@ -18,9 +19,11 @@ class _EventsTapState extends State<EventsTap> {
   @override
   Widget build(BuildContext context) {
     var eventListprovider = Provider.of<EventListProvide>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+        
     eventListprovider.getEventsNameList(context);
     if (eventListprovider.eventsList.isEmpty) {
-      eventListprovider.getAllEvent();
+      eventListprovider.getAllEvent(userProvider.currentUser!.id);
     }
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
@@ -37,7 +40,7 @@ class _EventsTapState extends State<EventsTap> {
                   AppLocalizations.of(context)!.welecome,
                   style: AppStyles.regular14White,
                 ),
-                Text('John Safwat', style: AppStyles.bold24White),
+                Text(userProvider.currentUser!.name, style: AppStyles.bold24White),
               ],
             ),
             Spacer(),
@@ -84,7 +87,7 @@ class _EventsTapState extends State<EventsTap> {
                   length: eventListprovider.eventsNameList.length,
                   child: TabBar(
                     onTap: (index) {
-                      eventListprovider.changeSelectedIndex(index);
+                      eventListprovider.changeSelectedIndex(index,userProvider.currentUser!.id);
                     },
                     isScrollable: true,
                     tabAlignment: TabAlignment.start,

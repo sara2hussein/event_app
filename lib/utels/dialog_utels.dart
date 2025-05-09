@@ -1,4 +1,3 @@
-
 import 'package:event_app/utels/app_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -68,12 +67,8 @@ class DialogUtels {
       context: context,
       builder: (context) {
         return AlertDialog(
-          content: Text(message,
-          style: AppStyles.medium16Black,),
-          title: Text(
-            title??'',
-            style: AppStyles.medium16Black,
-          ),
+          content: Text(message, style: AppStyles.medium16Black),
+          title: Text(title ?? '', style: AppStyles.medium16Black),
           actions: actions,
         );
       },

@@ -1,5 +1,6 @@
 import 'package:event_app/model/event.dart';
 import 'package:event_app/provider/event_list_provide.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
@@ -15,6 +16,8 @@ class EventItem extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var eventListProvider = Provider.of<EventListProvide>(context);
+    var userProvider = Provider.of<UserProvider>(context);
+
     return Container(
       height: height * 0.31,
 
@@ -80,7 +83,7 @@ class EventItem extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    eventListProvider.updateIsFavoriteEvents(event);
+                    eventListProvider.updateIsFavoriteEvents(event,userProvider.currentUser!.id);
                   },
                   icon: Image.asset(
                     event.isFavoret == true

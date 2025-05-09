@@ -1,6 +1,7 @@
 import 'package:event_app/UI/home/tabs/app_event/event_item.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
 import 'package:event_app/provider/event_list_provide.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
@@ -14,8 +15,10 @@ class LoveTap extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     var eventListProvider = Provider.of<EventListProvide>(context);
+        var userProvider = Provider.of<UserProvider>(context);
+
     if (eventListProvider.favoriteEventsList.isEmpty) {
-      eventListProvider.getAllFavoretEvent();
+      eventListProvider.getAllFavoretEvent(userProvider.currentUser!.id);
     }
     return Scaffold(
       body: Padding(

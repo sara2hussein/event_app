@@ -4,6 +4,7 @@ import 'package:event_app/UI/home/tabs/floting_button/event_date_or_time.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
 import 'package:event_app/model/event.dart';
 import 'package:event_app/provider/event_list_provide.dart';
+import 'package:event_app/provider/user_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:event_app/utels/app_styles.dart';
@@ -293,7 +294,31 @@ class _AddEventScreenState extends State<AddEventScreen> {
         description: descriptionController.text,
         eventName: selectedEventName,
       );
-      FirebaseUtels.addEventToFireStore(event).timeout(
+      var userProvider = Provider.of<UserProvider>(context,listen: false);
+      FirebaseUtels.addEventToFireStore(event, userProvider.currentUser!.id)
+      .then((value){
+        showDialog(
+            context: context,
+            builder:
+                (context) => AlertDialog(
+                  title: Text(AppLocalizations.of(context)!.success),
+                  content: Text(
+                    AppLocalizations.of(context)!.event_added_successfully,
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        eventListprovider.getAllEvent( userProvider.currentUser!.id);
+                        Navigator.of(context).pop();
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(AppLocalizations.of(context)!.ok),
+                    ),
+                  ],
+                ),
+          );
+      })
+      .timeout(
         Duration(milliseconds: 500),
         onTimeout: () {
           showDialog(
@@ -307,7 +332,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                   actions: [
                     TextButton(
                       onPressed: () {
-                        eventListprovider.getAllEvent();
+                        eventListprovider.getAllEvent( userProvider.currentUser!.id);
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
                       },

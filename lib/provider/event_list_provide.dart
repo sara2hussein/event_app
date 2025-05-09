@@ -28,9 +28,9 @@ class EventListProvide extends ChangeNotifier {
   }
 
   List<Event> favoriteEventsList = [];
-  void getAllEvent() async {
+  void getAllEvent(String uId) async {
     QuerySnapshot<Event> querySnapshot =
-        await FirebaseUtels.getEventCollection().get();
+        await FirebaseUtels.getEventCollection(uId).get();
     eventsList =
         querySnapshot.docs.map((doc) {
           return doc.data();
@@ -43,7 +43,13 @@ class EventListProvide extends ChangeNotifier {
     notifyListeners();
   }
 
-  void getFilterEvent() {
+  void getFilterEvent(String uId) async {
+    QuerySnapshot<Event> querySnapshot =
+        await FirebaseUtels.getEventCollection(uId).get();
+    eventsList =
+        querySnapshot.docs.map((doc) {
+          return doc.data();
+        }).toList();
     filterList =
         eventsList.where((event) {
           return event.eventName == eventsNameList[selectIndex];
@@ -56,29 +62,24 @@ class EventListProvide extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateIsFavoriteEvents(Event event) async {
-    FirebaseUtels.getEventCollection()
+  void updateIsFavoriteEvents(Event event,String uId) async {
+    FirebaseUtels.getEventCollection(uId)
         .doc(event.id)
         .update({'isFavoret': !event.isFavoret})
-        .timeout(
-          Duration(milliseconds: 500),
-          onTimeout: () {
-
-          },
-        );
+        .timeout(Duration(milliseconds: 500), onTimeout: () {});
     ToastUtels.toastMsg(
       msg: 'Favorite updated successfully',
       backgroundColor: AppColors.primaryLight,
       textColor: AppColors.whiteColor,
     );
-    selectIndex == 0 ? getAllEvent() : getFilterEventFromFirebase();
+    selectIndex == 0 ? getAllEvent(uId) : getFilterEventFromFirebase(uId);
     print('selectedIndex: $selectIndex');
-    getAllFavoretEvent();
+    getAllFavoretEvent(uId);
   }
 
-  void getFilterEventFromFirebase() async {
+  void getFilterEventFromFirebase(String uId) async {
     var querySnapshot =
-        await FirebaseUtels.getEventCollection()
+        await FirebaseUtels.getEventCollection(uId)
             .where('eventName', isEqualTo: eventsNameList[selectIndex])
             .orderBy('dateTime')
             .get();
@@ -88,9 +89,9 @@ class EventListProvide extends ChangeNotifier {
         }).toList();
   }
 
-  void getAllFavoretEvent() async {
+  void getAllFavoretEvent(String uId) async {
     var quarySnapshot =
-        await FirebaseUtels.getEventCollection()
+        await FirebaseUtels.getEventCollection(uId)
             .where('isFavoret', isEqualTo: true)
             .orderBy('dateTime')
             .get();
@@ -101,8 +102,8 @@ class EventListProvide extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeSelectedIndex(int newSelectedIndex) {
+  void changeSelectedIndex(int newSelectedIndex,String uId) {
     selectIndex = newSelectedIndex;
-    selectIndex == 0 ? getAllEvent() : getFilterEvent();
+    selectIndex == 0 ? getAllEvent(uId) : getFilterEvent(uId);
   }
 }

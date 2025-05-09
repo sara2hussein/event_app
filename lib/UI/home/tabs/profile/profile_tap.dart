@@ -1,5 +1,6 @@
 import 'package:event_app/UI/home/tabs/profile/languge_bottom_sheet.dart';
 import 'package:event_app/UI/home/tabs/profile/theme_bottom_sheet.dart';
+import 'package:event_app/UI/register/lodin_screen.dart';
 import 'package:event_app/provider/languge_provider.dart';
 import 'package:event_app/provider/theme_provider.dart';
 import 'package:event_app/utels/app_colors.dart';
@@ -153,7 +154,11 @@ class _ProfileTapState extends State<ProfileTap> {
                   vertical: height * 0.02,
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).pushReplacementNamed(LoginScreen.routeName);
+              },
               child: Row(
                 children: [
                   Icon(Icons.logout, color: AppColors.whiteColor),

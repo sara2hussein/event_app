@@ -1,6 +1,5 @@
 import 'package:event_app/UI/home/tabs/floting_button/custom_elevated_button.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
-import 'package:event_app/UI/intro/intro_screen.dart';
 import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/assets_manager.dart';
