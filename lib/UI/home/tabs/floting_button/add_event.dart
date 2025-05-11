@@ -1,6 +1,7 @@
 import 'package:event_app/UI/home/tabs/app_event/event_tap_icon.dart';
 import 'package:event_app/UI/home/tabs/floting_button/custom_elevated_button.dart';
 import 'package:event_app/UI/home/tabs/floting_button/event_date_or_time.dart';
+import 'package:event_app/UI/home/tabs/location/location_tap.dart';
 import 'package:event_app/UI/home/tabs/love/custom_text_feild.dart';
 import 'package:event_app/model/event.dart';
 import 'package:event_app/provider/event_list_provide.dart';
@@ -9,7 +10,6 @@ import 'package:event_app/utels/app_colors.dart';
 import 'package:event_app/utels/assets_manager.dart';
 import 'package:event_app/utels/app_styles.dart';
 import 'package:event_app/utels/firebase_utels.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
@@ -30,6 +30,10 @@ class _AddEventScreenState extends State<AddEventScreen> {
   TimeOfDay? selectedTime;
   String selectedImage = '';
   String selectedEventName = '';
+  String? lat;
+  String? lon;
+  String? locationName;
+
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
   var formKey = GlobalKey<FormState>();
@@ -186,47 +190,63 @@ class _AddEventScreenState extends State<AddEventScreen> {
                       style: AppStyles.medium16Black,
                     ),
                     SizedBox(height: height * 0.02),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: width * 0.02,
-                        vertical: height * 0.01,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(
-                          color: AppColors.primaryLight,
-                          width: 2,
+                    InkWell(
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => LocationTap()),
+                        );
+                        if (result != null) {
+                          lat = result['lat'].toString();
+                          lon = result['lon'].toString();
+                          locationName = result['place'];
+                          setState(() {});
+                        }
+                      },
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: width * 0.02,
+                          vertical: height * 0.02,
                         ),
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: AppColors.primaryLight,
-                            ),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Image.asset(AssetsManager.Iconlocation),
-                            ),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          border: Border.all(
+                            color: AppColors.primaryLight,
+                            width: 2,
                           ),
-                          SizedBox(height: height * 0.02),
-                          Text(
-                            AppLocalizations.of(context)!.choose_event_location,
-                            style: AppStyles.medium16Primary,
-                          ),
-                          Spacer(),
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: AppColors.primaryLight,
+                              ),
+                              child: Icon(
+                                Icons.location_on,
+                                color: Colors.white,
+                              ),
+                            ),
+                            SizedBox(width: width * 0.02),
+                            Expanded(
+                              child: Text(
+                                locationName ??
+                                    AppLocalizations.of(
+                                      context,
+                                    )!.choose_event_location,
+                                style: AppStyles.medium16Primary,
+                              ),
+                            ),
+                            Icon(
                               Icons.arrow_forward_ios_outlined,
                               color: AppColors.primaryLight,
                               size: 25,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
+
                     SizedBox(height: height * 0.04),
                     CustomElevatedButton(
                       onButtonClick: addEvent,
@@ -286,6 +306,19 @@ class _AddEventScreenState extends State<AddEventScreen> {
         );
         return;
       }
+      if (lat == null || lon == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(
+              AppLocalizations.of(context)!.choose_event_location,
+              style: AppStyles.medium16White,
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return;
+      }
+
       Event event = Event(
         image: selectedImage,
         title: titleController.text,
@@ -293,56 +326,63 @@ class _AddEventScreenState extends State<AddEventScreen> {
         dateTime: selectedDate!,
         description: descriptionController.text,
         eventName: selectedEventName,
+        lat: lat!,
+        lon: lon!,
       );
-      var userProvider = Provider.of<UserProvider>(context,listen: false);
+
+      var userProvider = Provider.of<UserProvider>(context, listen: false);
       FirebaseUtels.addEventToFireStore(event, userProvider.currentUser!.id)
-      .then((value){
-        showDialog(
-            context: context,
-            builder:
-                (context) => AlertDialog(
-                  title: Text(AppLocalizations.of(context)!.success),
-                  content: Text(
-                    AppLocalizations.of(context)!.event_added_successfully,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        eventListprovider.getAllEvent( userProvider.currentUser!.id);
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(AppLocalizations.of(context)!.ok),
+          .then((value) {
+            showDialog(
+              context: context,
+              builder:
+                  (context) => AlertDialog(
+                    title: Text(AppLocalizations.of(context)!.success),
+                    content: Text(
+                      AppLocalizations.of(context)!.event_added_successfully,
                     ),
-                  ],
-                ),
-          );
-      })
-      .timeout(
-        Duration(milliseconds: 500),
-        onTimeout: () {
-          showDialog(
-            context: context,
-            builder:
-                (context) => AlertDialog(
-                  title: Text(AppLocalizations.of(context)!.success),
-                  content: Text(
-                    AppLocalizations.of(context)!.event_added_successfully,
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          eventListprovider.getAllEvent(
+                            userProvider.currentUser!.id,
+                          );
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(AppLocalizations.of(context)!.ok),
+                      ),
+                    ],
                   ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        eventListprovider.getAllEvent( userProvider.currentUser!.id);
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(AppLocalizations.of(context)!.ok),
+            );
+          })
+          .timeout(
+            Duration(milliseconds: 500),
+            onTimeout: () {
+              showDialog(
+                context: context,
+                builder:
+                    (context) => AlertDialog(
+                      title: Text(AppLocalizations.of(context)!.success),
+                      content: Text(
+                        AppLocalizations.of(context)!.event_added_successfully,
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            eventListprovider.getAllEvent(
+                              userProvider.currentUser!.id,
+                            );
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
+                          },
+                          child: Text(AppLocalizations.of(context)!.ok),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+              );
+            },
           );
-        },
-      );
     }
   }
 }

@@ -54,6 +54,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         CreateAcc.routeName: (context) => CreateAcc(),
         ForgetPass.routeName: (context) => ForgetPass(),
+        
       },
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
